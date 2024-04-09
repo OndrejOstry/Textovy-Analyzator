@@ -43,7 +43,7 @@ password = input("password:")
 
 #PODMÍNKA VSTUPU
 if username in users and users[username] == password:
-    print("-"*30)
+    print("-"*40)
     print("welcome to the app,",username)
     print("We have 3 text to be analyzed.")
     chosen_number = input("Enter a number btw. 1 and 3 to select:")
@@ -58,7 +58,7 @@ if username in users and users[username] == password:
     total_upper = 0
     total_lower = 0
     total_numeric = 0
-    total_num = 0
+    total_numsum = 0
 
 #POČET SLOV ZAČÍNAJÍCÍCH VELKÝMI PÍSMENY
     
@@ -68,37 +68,36 @@ if username in users and users[username] == password:
             total_title += 1
     print("There are",total_title,"titlecase words.")
 
- #POČET SLOV NAPSANYCH VELKÝMI PÍSMENY
+#POČET SLOV NAPSANYCH VELKÝMI PÍSMENY
     for word in words:
         if word.isupper() and not any(i.isnumeric() for i in word):
             total_upper += 1
-    print("There are",total_upper,"uppercase words.")
-
 #POČET SLOV NAPSANYCH MALÝMI PÍSMENY
+        elif word.islower():
+            total_lower += 1
+#POČET NUMERICKÝCH STRINGŮ + SUMA VŠECH ČÍSEL       
+        elif word.isnumeric():
+            total_numsum += int(word)
+            total_numeric += 1
+   
+#VÝPISY   
+    print("There are",total_upper,"uppercase words.")
+    print("There are",total_lower,"lowercase words.")
+    print("There are",total_numeric,"numeric strings.")
+    print("The sum of all the numbers",total_numsum)
+    print("-"*40)
+
+#SLOUPCOVÝ GRAF
 
 
 
 
 
-#POČET NUMERICKÝCH STRINGŮ
 
 
 
-#SUMA VŠECH ČÍSEL
-    
-        
 
 
-        
-
-                
-            
-        
-    
-
-
-
-    
 
 else:
     print("unregistered user, terminating the program..")
