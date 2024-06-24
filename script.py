@@ -41,13 +41,17 @@ users = {"bob": "123", "ann": "pass123", "mike": "password123", "liz": "pass123"
 username = input("username:")
 password = input("password:")
 
+
+text_splitter = ("-"*40)
 #PODMÍNKA VSTUPU
 if username in users and users[username] == password:
-    print("-"*40)
+    print(text_splitter)
     print("welcome to the app,",username)
     print("We have 3 text to be analyzed.")
+    print(text_splitter)
     chosen_number = input("Enter a number btw. 1 and 3 to select:")
     chosen_text = TEXTS[int(chosen_number) - 1]
+    print(text_splitter)
 
 #POČET SLOV V TEXTU
     total_words = chosen_text.split()
@@ -61,8 +65,6 @@ if username in users and users[username] == password:
     total_numsum = 0
 
 #POČET SLOV ZAČÍNAJÍCÍCH VELKÝMI PÍSMENY
-    
-    
     for word in words:
         if word.istitle():
             total_title += 1
@@ -70,7 +72,7 @@ if username in users and users[username] == password:
 
 #POČET SLOV NAPSANYCH VELKÝMI PÍSMENY
     for word in words:
-        if word.isupper() and not any(i.isnumeric() for i in word):
+        if word.isupper() and word.isalpha():
             total_upper += 1
 #POČET SLOV NAPSANYCH MALÝMI PÍSMENY
         elif word.islower():
@@ -81,23 +83,34 @@ if username in users and users[username] == password:
             total_numeric += 1
    
 #VÝPISY   
-    print("There are",total_upper,"uppercase words.")
-    print("There are",total_lower,"lowercase words.")
-    print("There are",total_numeric,"numeric strings.")
-    print("The sum of all the numbers",total_numsum)
-    print("-"*40)
+    print(f"""There are {total_upper} uppercase words.
+There are {total_lower} lowercase words.
+There are {total_numeric} numeric strings.
+The sum of all the numbers {total_numsum}
+{text_splitter}""")
+    
+    
+    
+    
 
 #SLOUPCOVÝ GRAF
+    lengths = {}
+    for word in words:
+        length = len(word.strip(".,"))
+        if length in lengths:
+            lengths[length] += 1
+        else:
+            lengths[length] = 1
+
+    max_length = max(lengths.values())
+    
+    print("LEN|  OCCURENCES  |NR")
+    print(text_splitter)
+    for length in sorted(lengths):
+        print(f"{length:>3}|{'*' * lengths[length]:<{max_length}}|{lengths[length]}")
 
 
-
-
-
-
-
-
-
-
+        
 
 else:
     print("unregistered user, terminating the program..")
