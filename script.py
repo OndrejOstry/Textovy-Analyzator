@@ -35,12 +35,10 @@ in modern oceans. Other fish such as paddlefish,
 garpike and stingray are also present.'''
 ]
 
-
 #UŽIVATELÉ
 users = {"bob": "123", "ann": "pass123", "mike": "password123", "liz": "pass123"}
 username = input("username:")
 password = input("password:")
-
 
 text_splitter = ("-"*40)
 #PODMÍNKA VSTUPU
@@ -88,10 +86,6 @@ There are {total_lower} lowercase words.
 There are {total_numeric} numeric strings.
 The sum of all the numbers {total_numsum}
 {text_splitter}""")
-    
-    
-    
-    
 
 #SLOUPCOVÝ GRAF
     lengths = {}
@@ -108,9 +102,6 @@ The sum of all the numbers {total_numsum}
     print(text_splitter)
     for length in sorted(lengths):
         print(f"{length:>3}|{'*' * lengths[length]:<{max_length}}|{lengths[length]}")
-
-
-        
 
 else:
     print("unregistered user, terminating the program..")
