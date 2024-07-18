@@ -39,8 +39,8 @@ garpike and stingray are also present.'''
 users = {"bob": "123", "ann": "pass123", "mike": "password123", "liz": "pass123"}
 username = input("username:")
 password = input("password:")
-
 text_splitter = ("-"*40)
+
 #PODMÍNKA VSTUPU
 if username in users and users[username] == password:
     print(text_splitter)
