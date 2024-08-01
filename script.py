@@ -45,9 +45,21 @@ text_splitter = ("-"*40)
 if username in users and users[username] == password:
     print(text_splitter)
     print("welcome to the app,",username)
-    print("We have 3 text to be analyzed.")
+    print(f"We have {len(TEXTS)} text to be analyzed.")
     print(text_splitter)
-    chosen_number = input("Enter a number btw. 1 and 3 to select:")
+#UŽIVATELSKÝ VSTUP    
+    while True:
+        chosen_number = input(f"Enter a number between 1 and {len(TEXTS)} to select: ")    
+#OŠETŘENÍ VSTUPU 
+        try:
+            chosen_number = int(chosen_number)
+            if 1 <= chosen_number <= len(TEXTS):
+                break
+            else:
+                print(f"Please enter a number between 1 and {len(TEXTS)}.")
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
+    
     chosen_text = TEXTS[int(chosen_number) - 1]
     print(text_splitter)
 
@@ -64,13 +76,10 @@ if username in users and users[username] == password:
 
 #POČET SLOV ZAČÍNAJÍCÍCH VELKÝMI PÍSMENY
     for word in words:
-        if word.istitle():
+        if word[0].isalpha() and word[0].isupper() and word[1:].islower():
             total_title += 1
-    print("There are",total_title,"titlecase words.")
-
 #POČET SLOV NAPSANYCH VELKÝMI PÍSMENY
-    for word in words:
-        if word.isupper() and word.isalpha():
+        elif word.isupper() and word.isalpha():
             total_upper += 1
 #POČET SLOV NAPSANYCH MALÝMI PÍSMENY
         elif word.islower():
@@ -81,7 +90,8 @@ if username in users and users[username] == password:
             total_numeric += 1
    
 #VÝPISY   
-    print(f"""There are {total_upper} uppercase words.
+    print(f"""There are {total_title} titlecase words.
+There are {total_upper} uppercase words.
 There are {total_lower} lowercase words.
 There are {total_numeric} numeric strings.
 The sum of all the numbers {total_numsum}
@@ -90,7 +100,7 @@ The sum of all the numbers {total_numsum}
 #SLOUPCOVÝ GRAF
     lengths = {}
     for word in words:
-        length = len(word.strip(".,"))
+        length = len(word.strip(".,!?;:'\"-()[]{}"))
         if length in lengths:
             lengths[length] += 1
         else:
