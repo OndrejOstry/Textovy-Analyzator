@@ -74,12 +74,17 @@ if username in users and users[username] == password:
     total_numeric = 0
     total_numsum = 0
 
+
+    
 #POČET SLOV ZAČÍNAJÍCÍCH VELKÝMI PÍSMENY
     for word in words:
-        if word[0].isalpha() and word[0].isupper() and word[1:].islower():
+        
+        clean_word = word.strip(""".,!?;:'"-()[]{}""")
+        
+        if clean_word[0].isalpha() and clean_word[0].isupper():
             total_title += 1
 #POČET SLOV NAPSANYCH VELKÝMI PÍSMENY
-        elif word.isupper() and word.isalpha():
+        if word.isupper() and word.isalpha():
             total_upper += 1
 #POČET SLOV NAPSANYCH MALÝMI PÍSMENY
         elif word.islower():
@@ -88,7 +93,6 @@ if username in users and users[username] == password:
         elif word.isnumeric():
             total_numsum += int(word)
             total_numeric += 1
-   
 #VÝPISY   
     print(f"""There are {total_title} titlecase words.
 There are {total_upper} uppercase words.
